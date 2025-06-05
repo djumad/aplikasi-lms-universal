@@ -25,16 +25,19 @@
 
             <!-- Bagian Kanan (Gambar) -->
             <div class="lg:w-1/2 flex justify-center">
-                <div class="relative w-full max-w-md">
-                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-                    <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-                    <div class="absolute top-20 -right-4 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+                <div class="relative w-full max-w-xs md:max-w-sm">
+                    <!-- Blob animasi -->
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                    <div class="absolute -bottom-8 -right-8 w-24 h-24 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                    <div class="absolute top-20 -right-4 w-24 h-24 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
 
                     <div class="relative bg-white p-4 rounded-2xl shadow-xl border border-gray-100">
-                        <img src="{{ asset('foto/logo-smk.png') }}" alt="Logo SMK Negeri 3 Ambon" class="w-full h-auto object-contain rounded-lg">
+                        <img src="{{ asset('foto/logo-smk.png') }}" alt="Logo SMK Negeri 3 Ambon" class="w-48 sm:w-60 h-auto object-contain mx-auto rounded-lg">
+                        <!-- w-48 = 12rem, sm:w-60 = 15rem -->
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
