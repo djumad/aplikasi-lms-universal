@@ -22,6 +22,11 @@ class UjianResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id' , Auth::user()->id);
+    }
+    
     public static function canViewAny() : bool{
         return Auth::user()->role === "guru";
     }
@@ -38,6 +43,12 @@ class UjianResource extends Resource
                 Forms\Components\TextInput::make('Deskripsi')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('jenis')
+                    ->options([
+                        'UTS' => 'UTS',
+                        'UAS' => 'UAS'
+                    ])
+                    ->required(),
                 Forms\Components\DateTimePicker::make('jam_mulai')
                     ->required(),
                 Forms\Components\DateTimePicker::make('jam_selesai')
@@ -68,6 +79,8 @@ class UjianResource extends Resource
                 Tables\Columns\TextColumn::make('judul')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Deskripsi')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('jenis')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('jam_mulai')
                     ->dateTime()

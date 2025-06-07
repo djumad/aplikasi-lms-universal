@@ -28,7 +28,9 @@ Route::middleware(StorageMiddleware::class)->group(function () {
         return redirect('/login');
     })->name('logout');
 
-    Route::middleware(['auth', RoleMiddleware::class . ':admin,guru'])->prefix('admin')->group(function () {});
+    Route::middleware(['auth', RoleMiddleware::class . ':admin,guru'])->prefix('admin')->group(function () {
+        
+    });
 
     Route::middleware(['auth', RoleMiddleware::class . ':siswa'])->group(function () {
         Route::get('/dashboard/siswa', SiswaDashboard::class);

@@ -20,6 +20,11 @@ class TugasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id' , Auth::user()->id);
+    }
+
     public static function canViewAny() : bool{
         return Auth::user()->role === "guru";
     }
@@ -53,7 +58,7 @@ class TugasResource extends Resource
                     ->required(),
 
                 Forms\Components\Hidden::make('user_id')
-                    ->default(Auth::id()),
+                    ->default(fn()=> Auth::id()),
             ]);
     }
 

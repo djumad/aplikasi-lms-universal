@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('judul');
             $table->string('Deskripsi');
+            $table->enum('jenis',[ 'UTS' , 'UAS'])->default('UTS');
             $table->dateTime('jam_mulai');
             $table->dateTime('jam_selesai');
             $table->timestamps();

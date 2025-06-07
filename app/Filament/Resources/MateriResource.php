@@ -19,7 +19,12 @@ class MateriResource extends Resource
     protected static ?string $model = Materi::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id' , Auth::user()->id);
+    }
+    
     public static function canViewAny() : bool{
         return Auth::user()->role === "guru";
     }

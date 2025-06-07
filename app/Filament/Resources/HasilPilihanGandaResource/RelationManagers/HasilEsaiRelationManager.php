@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class HasilEsaiRelationManager extends RelationManager
 {
     protected static string $relationship = 'HasilEsai';
+    
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereHas('ujian' , function ($query){
+            $query->where('user_id' , Auth::user()->id);
+        });
+    }
     public static function canViewAny() : bool{
         return Auth::user()->role === "guru";
     }

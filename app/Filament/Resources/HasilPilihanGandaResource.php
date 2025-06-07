@@ -21,10 +21,23 @@ class HasilPilihanGandaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function canViewAny() : bool{
+    public static function getLabel(): ?string
+    {
+        return "Hasil Ujian";
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereHas('ujian', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        });
+    }
+
+    public static function canViewAny(): bool
+    {
         return Auth::user()->role === "guru";
     }
-    
+
     public static function canCreate(): bool
     {
         return false;
@@ -46,14 +59,24 @@ class HasilPilihanGandaResource extends Resource
                     ->label('Nama Siswa')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.kelas.nama')
-                    ->label('Nama Siswa')
+                    ->label('Kelas')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nilai')
+                    ->label('Nilai Pilihan Ganda')
                     ->numeric()
                     ->sortable(),
-            ])
-            ->filters([
-                //
+                Tables\Columns\TextColumn::make('nilai_esai')
+                    ->label('Nilai Esai')
+                    ->getStateUsing(function ($record) {
+                        return round($record->hasilEsais->avg('nilai') ?? 0, 2);
+                    }),
+                Tables\Columns\TextColumn::make('nilai_akhir')
+                    ->label('Nilai Akhir')
+                    ->getStateUsing(function ($record) {
+                        $pilihanGanda = $record->nilai ?? 0;
+                        $esai = $record->hasilEsais->avg('nilai') ?? 0;
+                        return round(($pilihanGanda + $esai) / 2, 2);
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -65,6 +88,7 @@ class HasilPilihanGandaResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {

@@ -20,6 +20,12 @@ class HasilTugasSiswaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereHas('tugas' , function ($query){
+            $query->where('user_id' , Auth::user()->id);
+        });
+    }
     public static function canViewAny() : bool{
         return Auth::user()->role === "guru";
     }
