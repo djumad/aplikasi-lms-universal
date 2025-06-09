@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Services\GeminiService;
+use Illuminate\Support\Facades\Auth;
 
 class ChatGemini extends Component
 {
@@ -11,12 +12,15 @@ class ChatGemini extends Component
     public array $messages = [];
     public bool $loading = false;
 
+    public $user;
+
     public function mount()
     {
+        $this->user = Auth::user()->name;
         // Pesan awal dari bot
         $this->messages[] = [
             'role' => 'assistant',
-            'content' => 'Halo! Saya Gemini. Ada yang bisa saya bantu?'
+            'content' => "Halo {$this->user} ! Ada yang bisa saya bantu?"
         ];
     }
 

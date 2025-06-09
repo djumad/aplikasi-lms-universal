@@ -69,6 +69,10 @@ class MateriResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label("Judul Materi")
                     ->sortable(),
+                Tables\Columns\TextColumn::make('file')
+                    ->formatStateUsing(fn() => 'Lihat Materi')
+                    ->url(fn($record) => "/storage/$record->file")
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('kelas.nama')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

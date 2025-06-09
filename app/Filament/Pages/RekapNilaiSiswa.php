@@ -9,6 +9,7 @@ use App\Models\User;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Auth;
 
 class RekapNilaiSiswa extends Page implements HasForms
 {
@@ -16,6 +17,10 @@ class RekapNilaiSiswa extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.rekap-nilai-siswa';
+
+    public static function canViewAny() : bool{
+        return Auth::user()->role === "guru";
+    }
 
     public $data = [];
 

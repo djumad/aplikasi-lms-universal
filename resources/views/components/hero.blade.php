@@ -15,10 +15,6 @@
                 <i class="bi bi-bell-fill text-lg"></i>
                 Masuk Sekarang
             </a>
-            <a href="#" class="px-6 py-3 bg-white hover:bg-gray-100 text-gray-800 font-medium rounded-lg border border-gray-300 shadow-sm transition duration-300 flex items-center justify-center gap-2" data-aos="zoom-in" data-aos-delay="400">
-                <i class="bi bi-info-circle-fill text-lg"></i>
-                Pelajari Lebih Lanjut
-            </a>
         </div>
     </div>
 

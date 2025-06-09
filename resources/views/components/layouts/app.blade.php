@@ -18,12 +18,11 @@
     </head>
 
     <body>
-        @if (request()->is('dashboard*'))
+        @if (request()->is('dashboard*') && !request()->is('dashboard/siswa/ujian/*'))
             <x-navbar />
         @endif
-        
-        {{ $slot }}
 
-        
+        {{ $slot }}
     </body>
+
 </html>

@@ -29,6 +29,12 @@ class TugasDetail extends Component
             'file_tugas' => ['required', 'file', 'max:10240'],
         ]);
 
+        if (now()->gt($this->tugas->deadline)) {
+            session()->flash('success', 'Tugas berhasil dikumpulkan (Terlambat)');
+        } else {
+            session()->flash('success', 'Tugas berhasil dikumpulkan');
+        }
+
         $path = $this->file_tugas->store('tugas_siswa', 'public');
 
         $this->hasilTugas = HasilTugasSiswa::updateOrCreate(
@@ -41,9 +47,9 @@ class TugasDetail extends Component
             ]
         );
 
-        session()->flash('success', 'Tugas berhasil dikumpulkan');
         $this->reset('file_tugas');
     }
+
 
     public function render()
     {
